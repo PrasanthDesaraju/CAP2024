@@ -1,0 +1,24 @@
+class Solution {
+    public int firstUniqChar(String s) {
+        HashMap<String, Integer> freq = new HashMap<String, Integer>();
+		HashMap<String, Integer> ind = new HashMap<String, Integer>();
+        int res = -1;
+        for(int i=0; i<s.length(); i++){
+            String str1 = s.substring(i,i+1);
+            int num1 = freq.getOrDefault(str1,0);
+            num1 = num1 + 1;
+            freq.put(str1,num1);
+            if(num1 == 1){
+               ind.put(str1,i);
+            }
+        }
+        for(int i=0; i<s.length(); i++){
+            String str2 = s.substring(i,i+1);
+            if (freq.get(str2) == 1){
+                res = ind.get(str2);
+                break;
+            }
+        }
+        return res;
+    }
+}

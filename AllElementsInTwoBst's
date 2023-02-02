@@ -1,0 +1,25 @@
+class Solution {
+    List<Integer> list = new ArrayList<>();
+    public List<Integer> inord(TreeNode root){
+        if (root == null){
+            return list;
+        }
+        inord(root.left);
+        list.add(root.val);
+        inord(root.right);
+        return list;
+    }
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        List<Integer> list1 = new ArrayList<>(inord(root1));
+        List<Integer> list2 = new ArrayList<>(inord(root2));
+        List<Integer> res = new ArrayList<>();
+        for(int i=0; i<list1.size(); i++){
+            res.add(list1.get(i));
+        }
+        for(int i=list1.size(); i<list2.size(); i++){
+            res.add(list2.get(i));
+        }
+        Collections.sort(res);
+        return res;
+    }
+}

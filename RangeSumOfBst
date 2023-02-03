@@ -1,0 +1,26 @@
+class Solution {
+    List<Integer> list = new ArrayList<>();
+    public List<Integer> inord(TreeNode root){
+        if (root == null) return list;
+        inord(root.left);
+        list.add(root.val);
+        inord(root.right);
+        return list;
+    }
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        inord(root);
+        int sum = 0,s=0,e=0;
+        for(int i=0; i<list.size(); i++){
+            if (list.get(i) == low){
+                s=i;
+            }
+            if (list.get(i) == high){
+                e=i;
+            }
+        }
+        for(int i=s; i<=e; i++){
+            sum += list.get(i);
+        }
+        return sum;
+    }
+}

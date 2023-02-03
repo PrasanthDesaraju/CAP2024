@@ -1,0 +1,24 @@
+class Solution {
+    List<Integer> list = new ArrayList<>();
+    public List<Integer> inord(TreeNode root){
+        if (root == null) return list;
+        inord(root.left);
+        list.add(root.val);
+        inord(root.right);
+        return list;
+    }
+    public boolean findTarget(TreeNode root, int k) {
+        inord(root);
+        int m=k;
+        for(int i=0; i<list.size(); i++){
+            int num1=list.get(i);
+            for(int j=i+1; j<list.size(); j++){
+                int num2 = list.get(j);
+                if (num1 + num2 == k){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}

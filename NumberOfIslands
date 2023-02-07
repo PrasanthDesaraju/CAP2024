@@ -1,0 +1,29 @@
+class Solution {
+    public void mark_islands(char[][] grid, int x, int y, int rows, int columns){
+        if (x<0 || x>=rows || y<0 || y>=columns || grid[x][y] != '1'){
+            return;
+        }
+        grid[x][y] = '2';
+        mark_islands(grid,x-1,y,rows,columns);
+        mark_islands(grid,x,y-1,rows,columns);
+        mark_islands(grid,x,y+1,rows,columns);
+        mark_islands(grid,x+1,y,rows,columns);
+    }
+    public int numIslands(char[][] grid) {
+        int rows = grid.length;
+        if (rows == 0){
+            return 0;
+        }
+        int columns = grid[0].length;
+        int no_of_islands = 0;
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<columns; j++){
+                  if (grid[i][j] == '1'){
+                      mark_islands(grid,i,j,rows,columns);
+                      no_of_islands++;
+                  }
+            }
+        }
+        return no_of_islands;
+    }
+}
